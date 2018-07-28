@@ -43,12 +43,28 @@ List<Employee> list2=new ArrayList<Employee>();
 		list2.add(emp2);
 		list2.add(emp3);
 		list2.add(emp4);
-		
+		//**************************************************
 		Stream<List<Employee>> list3=Stream.of(list1,list2);
 		List<Employee> list4=list3.flatMap(l-> l.stream().map(g->g)).collect(Collectors.toList());
 		
-		list4.forEach(s->System.out.println(s.getName()+"    "+s.getSalary()));
+		//list4.forEach(s->System.out.println(s.getName()+"    "+s.getSalary()));
 		
-		list4.stream().sorted((v1,v2)->v1.getSalary().compareTo(v2.getSalary()));
+		List<Employee> list5=list4.stream()
+								  .sorted((v1,v2)->v1.getSalary().compareTo(v2.getSalary()))
+								  .collect(Collectors.toList());
+		list5.forEach(s->System.out.println(s.getName()+"  sorted::  "+s.getSalary()));
+		
+		//**************************************************
+		
+		
+		List<Employee> list6=Stream.concat(list1.stream(),list2.stream())
+									.peek(f->System.out.println("1:::"+f.getName()))
+									.collect(Collectors.toList()).stream()
+									.peek(f->System.out.println("2:::"+f.getName()))
+									.sorted((t1,t2)-> t1.getSalary().compareTo(t2.getSalary()))
+									.peek(f->System.out.println("3:::"+f.getName()))
+									.collect(Collectors.toList());
+		list6.forEach(e->System.out.println(e.getName()+":::  list6 ::   "+e.getSalary()));
+		
 	}
 	}
