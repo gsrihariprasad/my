@@ -1,4 +1,4 @@
-package com.sriharilabs.streams.java2novice;
+package com.sriharilabs.streams.java;
 import java.util.stream.Stream;
 
 
