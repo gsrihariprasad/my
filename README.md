@@ -23,7 +23,11 @@ stream = list.stream();
 
 
 ===========================================
+
+
 3. Use Stream.generate()
+
+
 // generate()
 Stream<String> stream = Stream.generate(() -> "test").limit(10);
 String[] strArr = stream.toArray(String[]::new);
@@ -32,6 +36,8 @@ System.out.println(Arrays.toString(strArr));
 
 
 ===========================================
+
+
 4. Use Stream.iterate()
 
 // iterate()
@@ -40,6 +46,9 @@ BigInteger[] bigIntArr = bigIntStream.toArray(BigInteger[]::new);
 System.out.println(Arrays.toString(bigIntArr));
 
 ===========================================
+
+
+
 5. From Popular APIs
 
 // stream method from APIs
