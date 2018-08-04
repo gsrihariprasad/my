@@ -6,6 +6,34 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MergeAndSortedTwoArrayListBasedOnSalary {
+	
+	public static void way1(List<Employee> list1,List<Employee> list2) {
+		List<Employee> list6=Stream.concat(list1.stream(),list2.stream())
+									.collect(Collectors.toList()).stream()
+									.sorted((t1,t2)-> t1.getSalary().compareTo(t2.getSalary()))
+									.collect(Collectors.toList());
+		//list6.forEach(e->System.out.println(e.getName()+":::  list6 ::   "+e.getSalary()));
+		
+	}
+	
+	
+	public static void way2(List<Employee> list1,List<Employee> list2) {
+		
+		
+		List<Employee> list4=Stream.of(list1,list2)
+									.flatMap(l-> l.stream().map(g->g))
+									.collect(Collectors.toList());
+		
+		//list4.forEach(s->System.out.println(s.getName()+"    "+s.getSalary()));
+		
+		List<Employee> list5=list4.stream()
+								  .sorted((v1,v2)->v1.getSalary().compareTo(v2.getSalary()))
+								  .collect(Collectors.toList());
+		//list5.forEach(s->System.out.println(s.getName()+"  sorted::  "+s.getSalary()));
+		
+		
+		
+	}
 	public static void main(String a[]) {
 		
 		
@@ -43,49 +71,7 @@ public class MergeAndSortedTwoArrayListBasedOnSalary {
 		Employee emp6=new Employee("listThird_g_gshp","listThird_java develper",90);
 		listThird.add(emp5);
 		listThird.add(emp6);
-		/******************************************************************
-		 * **************************************************************
-		 */
-		Stream<List<Employee>> list3=Stream.of(list1,list2);
-		List<Employee> list4=list3.flatMap(l-> l.stream().map(g->g)).collect(Collectors.toList());
 		
-		//list4.forEach(s->System.out.println(s.getName()+"    "+s.getSalary()));
-		
-		List<Employee> list5=list4.stream()
-								  .sorted((v1,v2)->v1.getSalary().compareTo(v2.getSalary()))
-								  .collect(Collectors.toList());
-		//list5.forEach(s->System.out.println(s.getName()+"  sorted::  "+s.getSalary()));
-		
-		/****************************************************
-		 * **************************************************
-		 */
-		
-		List<Employee> list6=Stream.concat(list1.stream(),list2.stream())
-									.peek(f->System.out.println("1:::"+f.getName()))
-									.collect(Collectors.toList()).stream()
-									.peek(f->System.out.println("2:::"+f.getName()))
-									.sorted((t1,t2)-> t1.getSalary().compareTo(t2.getSalary()))
-									.peek(f->System.out.println("3:::"+f.getName()))
-									.collect(Collectors.toList());
-		//list6.forEach(e->System.out.println(e.getName()+":::  list6 ::   "+e.getSalary()));
-		
-		
-		
-		/******  Another Java 8 one-liner:  ******
-		 * 
-		 */
-		List<Employee> newList1 = Stream.of(list1, list2)
-                .flatMap(x -> x.stream())
-                .collect(Collectors.toList());
-		
-		/*********  As a bonus, since Stream.of() is variadic, 
-		 * you may concatenate as many lists as you like.
-		 */
-		List<Employee> newList2 = Stream.of(list1, list2, listThird)
-                .flatMap(x -> x.stream())
-                .collect(Collectors.toList());
-		System.out.println("___________________________________________");
-		newList2.forEach( p ->  System.out.println(p.getName()+"  ::  "+p.getSalary() ));
 		
 	}
 	}
